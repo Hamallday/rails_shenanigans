@@ -1,0 +1,38 @@
+<h1> 
+    <% if !@user.profile.username.nil? %>
+        <%= @user.profile.username %> 
+    <% else %> 
+        <%= @user.name%>
+<% end %> </h1>
+
+ 
+
+<h2> Work Experience </h2>
+    <% @user.user_companies.each do |uc| %>
+        <p> <%=link_to uc.company.name,  company_path(uc)%> <%= uc.year %> 
+    <%= (uc.year) == 1 ? 'year' : 'years'%> <%= link_to "Delete", uc, method: :delete, data: { confirm: "You sure?" } %></p>
+    <% end %> <br>
+
+<h2> About Me </h2>
+<% if @user.profile.nil? %>
+    <p> This user has not created a User Profile</p>
+<% else %> <% end %>
+    <p>Gender: <%= @user.profile.gender %></p>
+    <br>
+    <p>Ethnicity: <%= @user.profile.ethnicity %></p>
+    <br>
+    <p>Sexual Orientation: <%= @user.profile.sexorientation %></p>
+    <br>
+    <p>Nationality: <%= @user.profile.nationality %></p>
+    <br>
+    <p>A little bit about them: <%= @user.profile.bio %></p>
+    <br>
+    <p>Currently Employed? <%= @user.profile.employed %></p>
+    <br>
+
+
+    <p> Want to learn more about <%=@user.profile.username%>'s experiences? Copy their address below, shoot them an email, and start the conversation. </p>
+    <p><%= @user.email %></p>
+
+
+<%= link_to "Go Home", companies_path %>

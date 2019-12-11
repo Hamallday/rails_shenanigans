@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for :review, url: company_reviews_path do |f| %> 
+    <% if @review.errors.any? %>
+  <div class ="field_with_errors">
+    <h2>
+      <%= pluralize(@review.errors.count, "error") %>
+      prohibited this review from being saved:
+    </h2>
+ 
+    <ul>
+    <% @review.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li> 
+    <% end %>
+    </ul>
+  <div>
+<% end %>
+
+      <p>Please rate 1-5 stars. (1 being "poor" and 5 being "excellent")
+        <% f.label :rating %>
+        <%= f.number_field :rating %></p>
+
+      <p> Please title your review, so other users can find it! 
+      <% f.label :title %>
+      <%= f.text_field :title%></p>
+
+      <p> Tell us how you feel. 
+      <% f.label :content %>
+      <%= f.text_area :content %></p>
+
+      <%= f.submit "Submit review" %>
+    <% end %>
+
+   
+  </div>
+</div>

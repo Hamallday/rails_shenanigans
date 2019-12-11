@@ -1,0 +1,27 @@
+<h1>Welcome to Candorfy!</h1>
+
+<% if current_user %>
+    <div> Welcome back, <%= current_user.email %>! </div>
+    <% end %>
+  
+    <br>
+    <% if current_user %>  
+    <%= link_to 'Check out company reviews', companies_path %>
+    <% end %>
+
+    
+
+
+
+<% unless current_user %>
+<%= link_to 'Login with Facebook', user_facebook_omniauth_authorize_path %> 
+<br>
+    <%= link_to 'Login with email', new_user_session_path %>
+<br>
+    <%= link_to 'Sign Up!', new_user_registration_path %>
+<% end %>
+<br>
+    <%= link_to 'Logout', destroy_user_session_path, method: :delete%>
+
+
+

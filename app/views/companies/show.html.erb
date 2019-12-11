@@ -1,0 +1,37 @@
+<%= link_to "Add employment with this company", new_user_company_path(company_id: @company.id) %>
+
+<h1 style='margin-top:100px;font-size:2rem'><%= @company.name %></h1>
+ 
+    <p><%= @company.reviews.average(:rating)%> stars</p> 
+    <p>Website: <%= @company.website %></p>
+    <p>Headquarters: <%= @company.headquarters %></p>
+    <p>Industry: <%= @company.industry %></p>
+    <p>Number of Employees: <%= @company.number_of_employees %></p>
+    <p>Revenue: <%= @company.revenue %></p>
+    <p>Publicly Owned: <%= @company.publicly_owned %></p>
+    <p>Mission Statement or Motto: <%= @company.mission_motto_ideal %></p>
+<br>
+ <p> Check out what other people had to say: </p> 
+<ul> 
+ <% @company.reviews.each do |review| %>
+<li><%= link_to review.title,  review_path(review) %>
+(<%=review.rating%> <%= (review.rating) == 1 ? 'Star' : 'Stars' %>) </li>
+<p> <%= review.thanks.count%> <%= (review.rating) == 1 ? 'thank' : 'thanks' %>, 
+<%= review.comments.count%> <%= (review.rating) == 1 ? 'comment' : 'comments' %>
+<br>
+
+ <% end %>
+ </ul>
+
+
+
+ <%= link_to "Want to submit a review of this company? Click here.", new_company_review_path(@company) %>
+<br>
+<br>
+<%= link_to "Delete Company", @company, method: :delete, data: { confirm: "You sure?" } %>
+<br>
+<%= link_to "Check out other companies.", companies_path %>
+<br>
+<br>
+<br>
+<%= link_to 'Logout', destroy_user_session_path, method: :delete%>

@@ -1,0 +1,43 @@
+<% if !current_user.image.nil? %>
+    <%= image_tag(current_user.image) %>
+  <% end %>
+
+<% if !current_user.profile.nil? %>
+  <%= link_to 'View your profile', user_path(current_user)%>
+  <% end %>
+
+<% if current_user.profile.nil? %>
+<p> Please create a <%= link_to 'User Profile', new_user_profile_path(current_user)%>! </p>
+   
+  <% end %>
+
+<br>
+    
+    
+
+<h2 style='margin-top:100px;font-size:2rem'>Search for a company below, or submit one yourself.</h2>
+
+<% @companies.each do |company| %>
+  <h1 style='font-size:1.5rem;margin-top:50px'>
+      <%=link_to company.name,  company_path(company)%>:
+       <% if company.reviews.blank? %>
+ <p>This company has not been rated or reviewed yet.</p>  
+ <% else %> 
+<%=company.reviews.average(:rating)%> stars</h1> 
+      
+       <% end %>
+   <p>Website: <%= company.website %></p>
+   <p>Headquarters: <%= company.headquarters %></p>
+   <p>Annual Revenue: <%= company.revenue %></p>
+   <p>Mission, Motto, or Ideals: <%= company.mission_motto_ideal%></p>
+   <br>
+   <br>
+   
+ 
+  <% end %>
+  
+
+
+<%= link_to "Don't see a company you're looking for? Submit a new company.", new_company_path %>
+<br>
+<%= link_to 'Logout', destroy_user_session_path, method: :delete%>

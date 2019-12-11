@@ -1,0 +1,58 @@
+<h2>User Profile</h2>
+
+<%= form_for :profile, url: user_profiles_path do |f| %>
+  
+    <div class="field">
+        <%= f.label :username %><br />
+        <%= f.text_field :username %>
+    </div>
+    <div class="field">
+        <%= f.label :ethnicity %><br />
+        <%= f.select :ethnicity, %w{African/African-descended European/European-descended NativeAmerican/FirstNations Latinx Asian/Asian-descended Multi-Ethnic}, :prompt => 'Select', required: true, placeholder: 'Gender' %>
+    </div>
+
+    <div class="field">
+        <%= f.label :gender %><br />
+        <%= f.select :gender, %w{Woman Man Transgender NonBinary Other }, :prompt => 'Select', required: true %>
+    </div>
+    
+    <div class="field">
+        Sexual Orientation<% f.label :sexorientation %><br />
+        <%= f.select :sexorientation, %w{Straight Lesbian Gay Bisexual Pansexual Asexual Queer Other }, :prompt => 'Select', required: true %>
+    </div>
+
+    <div class="field">
+        <%= f.label :nationality %><br />
+        <%= f.select :nationality, %w{American Other }, :prompt => 'Select', required: true %>
+    </div>
+
+    <div class="field">
+        <%= f.label :age %><br />
+        <%= f.number_field :age %>
+    </div>
+
+    <div class="field">
+        <%= f.label :bio %><br />
+        <%= f.text_area :bio %>
+    </div>
+
+    <div class="field">
+        <%= f.label :employed %><br />
+        <%= f.check_box :employed %>
+    </div>
+    
+    <%# <%= f.hidden_field :user_id, value: @user.id %>
+
+        <div class="actions">
+            <%= f.submit "Create" %>
+        </div>
+        <% end %>
+
+    <% if @profile.errors.any? %>
+    <div class ="field_with_errors">
+        <ul class="Signup_Errors">
+        <% for message_error in @profile.errors.full_messages %>
+        <li>* <%= message_error %></li>
+        <% end %>
+        </ul>
+    <% end %>

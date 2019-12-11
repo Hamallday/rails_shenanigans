@@ -1,0 +1,66 @@
+<h2>Submit a new Company</h2>
+
+<%= form_for(@company) do |f| %>
+    <div class="field">
+        <%= f.label :name %><br />
+        <%= f.text_field :name %>
+    </div>
+
+    <div class="field">
+        <%= f.label :headquarters %><br />
+        <%= f.text_field :headquarters %>
+    </div>
+
+    <div class="field">
+        <%= f.label :industry %><br />
+        <%= f.select :industry, 
+        %w{Agriculture Apparel/Fashion Animals/Pets Manufacturing Electronics Pharmaceuticals Food Telecommunications Energy Media Medicine Music Education Film Software/Technology }, :prompt => 'Select', required: true, placeholder: 'Industry' %>  
+    </div>
+
+    <div class="field">
+        Number of Employees<% f.label :number_of_employees %><br />
+        <%= f.select :number_of_employees,
+        %w{1-50 51-99 100-499 500-999 1000+ 10K+ } %>
+    </div>
+
+    <div class="field">
+        <%= f.label :revenue %><br />
+        <%= f.select :revenue, %w{ <$5M $5M-$10M $10M-$1B $1B-$5B $5B+ }, :prompt => 'Select', required: true, placeholder: 'Revenue' %>
+    </div>
+
+    <div class="field">
+        Publicly owned company? <% f.label :publicly_owned %><br />
+        <%= f.check_box :publicly_owned %>
+    </div>
+
+
+    <div class="field">
+        <%= f.label :website %><br />
+        <%= f.text_field :website %>
+    </div>
+
+    <div class="field">
+        Does this company have a mission statement, motto, or core values? Please share below.
+        <% f.label :mission_motto_ideal %><br />
+        <%= f.text_area :mission_motto_ideal %>
+    </div>
+
+    <% f.label :user %>
+    <%= collection_select(:company, :user_ids, User.all, :id, 
+        :name, {:selected => @company.user_ids, :include_blank => true }, { :multiple => false } )%>
+
+
+  <br>
+  <br>
+    <div class="actions">
+        <%= f.submit "Submit company profile" %>
+    </div>
+<% end %>
+
+    <% if @company.errors.any? %>
+        <div class ="field_with_errors">
+        <ul class="Submission_Errors">
+        <% for message_error in @company.errors.full_messages %>
+        <li>* <%= message_error %></li>
+    <% end %>
+<% end %>    

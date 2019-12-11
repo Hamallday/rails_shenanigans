@@ -1,0 +1,9 @@
+<h2> Work Experience </h2>
+<% @user_companies.each do |uc| %>
+    <p> <%=link_to uc.company.name,  company_path(uc)%>
+        <ul> <%= uc.year %> 
+    <%= (uc.year) == 1 ? 'year' : 'years'%>
+    </p>
+    <% end %>
+
+<h2> About Me </h2>

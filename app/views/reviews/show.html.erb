@@ -1,0 +1,26 @@
+
+<h1> <%= @review.title %>
+(<%= @review.rating  %>
+<%= (@review.rating) == 1 ? 'Star' : 'Stars' %>)</h1>
+
+<h3><%= @review.content %> <%= @review.created_at %> </h3>
+
+<p><%= @review.thanks.count %> <%= (@review.thanks.count) == 1 ? 'Thank' : 'Thanks'%> </p>  
+<p><%= button_to 'Thank', review_thanks_path(@review), method: :post %>
+<%= button_to "Comment", new_review_comment_path(@review), method: :get %></p>
+<br>
+<br>
+
+
+<h3> Comments: </h3>
+ <% @review.comments.each do |comment| %>
+    <br> <%=comment.user.name %>:
+    <%=comment.content %><br> 
+     <%end %> 
+
+
+<br>
+<br>
+<p> Go back to <%= link_to @review.company.name, company_path(@review.company)  %>
+<%= link_to "Check out other companies.", companies_path %>
+<%= link_to 'Logout', destroy_user_session_path, method: :delete%>
